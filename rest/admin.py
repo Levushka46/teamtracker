@@ -8,7 +8,7 @@ from .models import Employee, Department
 class EmployeeAdmin(admin.ModelAdmin):
     list_display = ("full_name", "position", "department")
     list_select_related = ("department",)
-    list_filter = ("department", )
+    list_filter = ("department",)
     search_fields = ("first_name", "last_name", "middle_name", "position", "department__name")
 
     def full_name(self, instance: Employee) -> str:
@@ -16,7 +16,7 @@ class EmployeeAdmin(admin.ModelAdmin):
 
     def get_queryset(self, *args, **kwargs) -> QuerySet:
         qs = super().get_queryset(*args, **kwargs)
-        return qs.annotate(full_name=Concat('first_name', Value(' '), 'last_name', Value(' '), 'middle_name'))
+        return qs.annotate(full_name=Concat("first_name", Value(" "), "last_name", Value(" "), "middle_name"))
 
 
 @admin.register(Department)
