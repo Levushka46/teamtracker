@@ -4,11 +4,6 @@ from django.db.models import Value, QuerySet
 from .models import Employee, Department
 
 
-class EmployeeInline(admin.TabularInline):
-    model = Employee
-    extra = 0
-
-
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
     list_display = ("full_name", "position", "department")
@@ -46,12 +41,6 @@ class DepartmentAdmin(admin.ModelAdmin):
     list_select_related = ("parent",)
     list_filter = ("parent",)
     search_fields = ("name",)
-    inlines = []
-
-    def get_inlines(self, request, obj=None) -> QuerySet:
-        if not obj:
-            return super().get_inlines(request, obj)
-        return [EmployeeInline]
 
     def parent(self, instance: Department) -> str:
         return instance.parent.name
