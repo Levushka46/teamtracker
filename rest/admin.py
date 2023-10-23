@@ -16,7 +16,20 @@ class EmployeeAdmin(admin.ModelAdmin):
     list_filter = ("department",)
     search_fields = ("first_name", "last_name", "middle_name", "position", "department__name")
     fieldsets = (
-        (None, {"fields": ("last_name", "first_name", "middle_name", "position", "employment_date", "salary", "department")}),
+        (
+            None,
+            {
+                "fields": (
+                    "last_name",
+                    "first_name",
+                    "middle_name",
+                    "position",
+                    "employment_date",
+                    "salary",
+                    "department",
+                )
+            },
+        ),
     )
 
     def full_name(self, instance: Employee) -> str:

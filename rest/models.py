@@ -23,6 +23,7 @@ class Department(models.Model):
         verbose_name = _("department")
         verbose_name_plural = _("departments")
 
+
 class Employee(models.Model):
     first_name = models.CharField(_("first name"), max_length=150, blank=True)
     last_name = models.CharField(_("last name"), max_length=150, blank=True)
