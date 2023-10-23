@@ -42,5 +42,21 @@ def create_employees(num_employees):
 
     Employee.objects.bulk_create(employees)
 
+
+def create_department_hierarchy(name, parent=None, depth=1, max_depth=5, max_children=5):
+    if depth > max_depth:
+        return
+
+    department = Department.objects.create(name=name, parent=parent)
+
+    num_children = random.randint(0, max_children)
+    for _ in range(num_children):
+        child_name = f"{name} Subdepartment {depth}-{_ + 1}"
+        create_department_hierarchy(child_name, parent=department, depth=depth + 1, max_depth=max_depth, max_children=max_children)
+
+# Начинаем создание иерархии
+with transaction.atomic():
+    create_department_hierarchy("Department", max_depth=5, max_children=5)
+
 # Создаем 50000 записей Employee
 create_employees(50000)
