@@ -19,13 +19,16 @@ class Department(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = _("department")
+        verbose_name_plural = _("departments")
 
 class Employee(models.Model):
     first_name = models.CharField(_("first name"), max_length=150, blank=True)
     last_name = models.CharField(_("last name"), max_length=150, blank=True)
     middle_name = models.CharField(_("middle name"), max_length=150, blank=True)
     position = models.CharField(_("position"), max_length=75, blank=True)
-    employment_date = models.DateTimeField(_("employment date"), auto_now_add=True)
+    employment_date = models.DateTimeField(_("employment date"))
     salary = MoneyField(_("salary"), default=Money("0.01", "RUB"), max_digits=10, decimal_places=2)
     department = models.ForeignKey(
         Department, verbose_name=_("department"), on_delete=models.CASCADE, related_name="department"
@@ -33,3 +36,7 @@ class Employee(models.Model):
 
     def __str__(self):
         return self.first_name
+
+    class Meta:
+        verbose_name = _("employee")
+        verbose_name_plural = _("employees")
