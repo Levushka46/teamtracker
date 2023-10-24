@@ -78,8 +78,12 @@ WSGI_APPLICATION = "teamtracker.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "teamtrackerdb",
+        "USER": "teamtracker",
+        "PASSWORD": "teamtracker_password",
+        "HOST": "db",
+        "PORT": "5432",
     }
 }
 
@@ -124,3 +128,11 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+ADMINS = (
+    # ('Your Name', 'your_email@domain.com'),
+    ("admin", "admin@mysite.com"),
+)
+ADMIN_USERNAME = "admin"
+ADMIN_EMAIL = "admin@mysite.com"
+ADMIN_INITIAL_PASSWORD = "admin"  # To be changed after first login by admin
